@@ -12,15 +12,17 @@ static void setupHardware()
 {
     /* Enable GPIOC clock. */
     rcc_periph_clock_enable(RCC_GPIOC);
+    rcc_periph_clock_enable(RCC_GPIOA);
     rcc_periph_clock_enable(RCC_USART1);
 
     /* Set GPIOC13 to output push-pull. */
     gpio_set_mode(GPIOC, GPIO_MODE_OUTPUT_2_MHZ,
                   GPIO_CNF_OUTPUT_PUSHPULL, GPIO13);
 
-    gpio_set_mode(GPIOA, GPIO_MODE_OUTPUT_50_MHZ,
-                  GPIO_CNF_OUTPUT_ALTFN_PUSHPULL,
-                  GPIO_USART1_TX);
+    gpio_set_mode(GPIOA,
+        GPIO_MODE_OUTPUT_50_MHZ,
+        GPIO_CNF_OUTPUT_ALTFN_PUSHPULL,
+        GPIO_USART1_TX);
 
     usart_set_baudrate(USART1, 38400);
     usart_set_databits(USART1, 8);
@@ -58,14 +60,14 @@ extern "C" void usartTask(void *pvParameters)
     char c = '0' - 1;
 
     for (;;) {
-        vTaskDelay(pdMS_TO_TICKS(200));
+        //vTaskDelay(pdMS_TO_TICKS(200));
         if (++c >= 'Z') {
-            uart_putc(c);
+            uart_putc('0');
             uart_putc('\r');
             uart_putc('\n');
             c = '0' - 1;
         } else {
-            uart_putc(c);
+            uart_putc('0');
         }
     }
 }
