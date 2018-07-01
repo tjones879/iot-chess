@@ -45,7 +45,7 @@ BinarySemaphore::~BinarySemaphore()
     vSemaphoreDelete(semaphore);
 }
 
-bool BinarySemaphore::take(TickType_t blockTime = portMAX_DELAY)
+bool BinarySemaphore::take(TickType_t blockTime)
 {
     auto result = xSemaphoreTake(semaphore, blockTime);
     return pdToBoolean(result);

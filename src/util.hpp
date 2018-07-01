@@ -59,7 +59,7 @@ class BinarySemaphore
 public:
     BinarySemaphore();
     ~BinarySemaphore();
-    bool take(TickType_t blockTime);
+    bool take(TickType_t blockTime = portMAX_DELAY);
     bool give();
     bool giveFromISR(BaseType_t *taskWoken);
     SemaphoreHandle getRAII();
@@ -106,4 +106,4 @@ public:
         head = 0;
         tail = 0;
     }
-}
+};

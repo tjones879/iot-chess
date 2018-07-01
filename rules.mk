@@ -107,7 +107,7 @@ TGT_CFLAGS	+= -fno-common -ffunction-sections -fdata-sections
 
 TGT_CXXFLAGS	+= $(OPT) $(CXXSTD) $(DEBUG)
 TGT_CXXFLAGS	+= $(ARCH_FLAGS)
-TGT_CXXFLAGS	+= -Wextra -Wshadow -Wredundant-decls  -Weffc++ -std=c++14
+TGT_CXXFLAGS	+= -Wall -Wextra -Wshadow -Wredundant-decls  -Weffc++ -std=c++17
 TGT_CXXFLAGS	+= -fno-common -fno-exceptions -ffunction-sections -fdata-sections
 
 ###############################################################################
