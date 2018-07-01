@@ -47,7 +47,7 @@ CSTD		?= -std=c99
 ###############################################################################
 # Source files
 
-OBJS		+= $(BINARY).o tasks.o queue.o port.o list.o heap_1.o opencm3.o
+OBJS		+= $(BINARY).o tasks.o queue.o port.o list.o heap_1.o opencm3.o esp8266.o util.o
 
 
 ifeq ($(strip $(OPENCM3_DIR)),)

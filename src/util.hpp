@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <array>
 #include <FreeRTOS/FreeRTOS.h>
 #include <FreeRTOS/semphr.h>
 
@@ -57,3 +58,41 @@ public:
     bool giveFromISR(BaseType_t *taskWoken);
     SemaphoreHandle getRAII();
 };
+
+/**
+ * 
+ * 
+ */
+template <typename T, size_t size>
+class CircularBuffer {
+    std::array<T, size> buffer;
+    size_t head, tail;
+public:
+    CircularBuffer() : head(0), tail(0) { }
+
+    /**
+     * @brief Write an item to the back of the circular buffer.
+     */
+    inline void push_back(T item)
+    {
+        tail %= size;
+        buffer[tail] = item;
+        tail++;
+    }
+
+    /**
+     * @brief Read an item from the head of the circular buffer.
+     */
+    inline T pop()
+    {
+        head %= size;
+        head++;
+        return buffer[head - 1];
+    }
+
+    void clear()
+    {
+        head = 0;
+        tail = 0;
+    }
+}
