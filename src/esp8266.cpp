@@ -35,13 +35,13 @@ int ESP8266Device::restart()
 }
 
 /**
- * 
+ *
  */
 int ESP8266Device::wifiMode(ATType type, WIFIMode mode)
 {
     auto cmdHandle = command.getRAII();
     std::string suffix = "+CWMODE";
-    switch(type) {
+    switch (type) {
     case ATType::QUERY:
         suffix += "?";
         break;
@@ -59,45 +59,24 @@ int ESP8266Device::wifiMode(ATType type, WIFIMode mode)
         return -1;
 }
 
-int ESP8266Device::connectAP(ATType type)
-{
+int ESP8266Device::connectAP(ATType type) {}
 
-}
+int ESP8266Device::getAPList(ATType type) {}
 
-int ESP8266Device::getAPList(ATType type)
-{
+int ESP8266Device::disconnectAP() {}
 
-}
+int ESP8266Device::softAPMode(ATType type) {}
 
-int ESP8266Device::disconnectAP()
-{
+int ESP8266Device::listClients() {}
 
-}
+int ESP8266Device::setDHCP() {}
 
-int ESP8266Device::softAPMode(ATType type)
-{
-
-}
-
-int ESP8266Device::listClients()
-{
-
-}
-
-int ESP8266Device::setDHCP()
-{
-
-}
-
-int ESP8266Device::connStatus(ATType type)
-{
-
-}
+int ESP8266Device::connStatus(ATType type) {}
 
 int ESP8266Device::connStart(const Connection &conn)
 {
     std::string suffix = "+CIPSTART";
-    switch(conn.type) {
+    switch (conn.type) {
     case ConnectionType::UDP:
         suffix += "\"UDP\"";
     case ConnectionType::TCP:
@@ -114,23 +93,14 @@ int ESP8266Device::connStart(const Connection &conn)
         return -1;
 }
 
-int ESP8266Device::sendData(ATType type)
-{
+int ESP8266Device::sendData(ATType type) {}
 
-}
+int ESP8266Device::connClose(ATType type) {}
 
-int ESP8266Device::connClose(ATType type)
-{
+int ESP8266Device::getIP() {}
 
-}
-
-int ESP8266Device::getIP()
-{
-
-}
-
-HttpResult ESP8266Interface::request(const Connection &conn, const HttpRequest &request)
+HttpResult ESP8266Interface::request(const Connection &conn,
+                                     const HttpRequest &request)
 {
     // Connect to the location
-
 }

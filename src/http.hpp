@@ -2,21 +2,25 @@
 
 #include <string>
 
-enum class HttpCode : uint8_t {
+enum class HttpCode : uint8_t
+{
     HTTP_OK,
 };
 
-enum class RequestType : uint8_t {
+enum class RequestType : uint8_t
+{
     GET,
     POST
 };
 
-enum class ConnectionType : uint8_t {
+enum class ConnectionType : uint8_t
+{
     UDP,
     TCP
 };
 
-class Connection {
+class Connection
+{
 public:
     ConnectionType type;
     std::string address;
@@ -37,10 +41,11 @@ public:
     std::string path;
     std::string body;
 
-    std::string toString() {
+    std::string toString()
+    {
         std::string request;
 
-        switch(type) {
+        switch (type) {
         case RequestType::GET:
             request += "GET";
         case RequestType::POST:
@@ -59,5 +64,6 @@ public:
 class HttpClient
 {
 public:
-    virtual HttpResult request(const Connection &conn, const HttpRequest &request);
+    virtual HttpResult request(const Connection &conn,
+                               const HttpRequest &request);
 };

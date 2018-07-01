@@ -8,8 +8,9 @@ bool pdToBoolean(BaseType_t val)
         return false;
 }
 
-SemaphoreHandle::SemaphoreHandle(SemaphoreHandle_t *handle, TickType_t ticksToWait)
-    : semaphore(handle)
+SemaphoreHandle::SemaphoreHandle(SemaphoreHandle_t *handle,
+                                 TickType_t ticksToWait)
+  : semaphore(handle)
 {
     xSemaphoreTake(*semaphore, ticksToWait);
 }
@@ -44,7 +45,7 @@ BinarySemaphore::~BinarySemaphore()
     vSemaphoreDelete(semaphore);
 }
 
-bool BinarySemaphore::take(TickType_t blockTime=portMAX_DELAY)
+bool BinarySemaphore::take(TickType_t blockTime = portMAX_DELAY)
 {
     auto result = xSemaphoreTake(semaphore, blockTime);
     return pdToBoolean(result);
