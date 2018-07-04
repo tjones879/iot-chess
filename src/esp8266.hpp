@@ -3,21 +3,7 @@
 #include "http.hpp"
 #include "util.hpp"
 #include <string>
-
-enum class ATType : uint8_t
-{
-    TEST,
-    QUERY,
-    EXECUTE,
-    SET
-};
-
-enum class WIFIMode : char
-{
-    Client = '1',
-    Host = '2',
-    Dual = '3'
-};
+#include "atparser.hpp"
 
 /**
  * @brief A modem-level driver for the ESP 8266 wifi module.
@@ -38,25 +24,22 @@ public:
 
     int testAT();
     int restart();
-    int wifiMode(ATType type, WIFIMode mode);
-    int connectAP(ATType type);
-    int getAPList(ATType type);
+    int wifiMode(AT::Type type, WIFIMode mode);
+    int connectAP(AT::Type type);
+    int getAPList(AT::Type type);
     int disconnectAP();
-    int softAPMode(ATType type);
+    int softAPMode(AT::Type type);
     int listClients();
     int setDHCP();
-    int connStatus(ATType type);
+    int connStatus(AT::Type type);
     int connStart(const Connection &conn);
-    int sendData(ATType type);
-    int connClose(ATType type);
+    int sendData(AT::Type type);
+    int connClose(AT::Type type);
     int getIP();
 
 private:
-    void sendAT(std::string command);
+    void sendAT(AT::Code command);
 };
-
-class AccessPoint
-{};
 
 class ESP8266Interface : public HttpClient
 {

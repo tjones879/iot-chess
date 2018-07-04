@@ -1,15 +1,32 @@
 #include "esp8266.hpp"
+#include "atparser.hpp"
 
 #include <libopencm3/stm32/usart.h>
 
-void ESP8266Device::sendAT(std::string suffix)
+void ESP8266Device::sendAT(AT::Code command, const std::string &extra)
 {
-    // All commands begin with AT followed by +<SUFFIX>
-    auto str = suffix.c_str();
+    // All messages begin with AT followed by <command>
     usart_send_blocking(_usart, 'A');
     usart_send_blocking(_usart, 'T');
-    for (auto i = 0; i < suffix.size(); i++)
-        usart_send_blocking(_usart, str[i]);
+
+    auto cmdStr = AT::toStr(command);
+    for (auto i : cmdStr)
+        usart_send_blocking(_usart, i);
+
+    std::string_view extraView{extra.c_str(), extra.size()};
+    for (auto i : extraView)
+        usart_send_blocking(_usart, i);
+
+    usart_send_blocking(_usart, '\r');
+    usart_send_blocking(_usart, '\n');
+}
+
+void ESP8266Device::send(std::string text)
+{
+    auto str = text.c_str();
+    for (char c : text)
+        usart_send_blocking(_usart, c);
+
     usart_send_blocking(_usart, '\r');
     usart_send_blocking(_usart, '\n');
 }
@@ -27,7 +44,7 @@ int ESP8266Device::testAT()
 int ESP8266Device::restart()
 {
     auto cmdHandle = command.getRAII();
-    sendAT("+RST");
+    sendAT(AT::Code::RST);
     if (response.take())
         return 0;
     else
@@ -37,41 +54,54 @@ int ESP8266Device::restart()
 /**
  *
  */
-int ESP8266Device::wifiMode(ATType type, WIFIMode mode)
+int ESP8266Device::wifiMode(AT::Type type, WIFIMode mode)
 {
     auto cmdHandle = command.getRAII();
-    std::string suffix = "+CWMODE";
-    switch (type) {
-    case ATType::QUERY:
-        suffix += "?";
-        break;
-    case ATType::EXECUTE:
-        break;
-    default:
-        return -1;
-        break;
-    }
+    std::string suffix;
+    if (type == AT::Type::Query)
+        suffix = "?";
 
-    sendAT(suffix);
+    sendAT(AT::Code::CWMODE, suffix);
     if (response.take())
         return 0;
     else
         return -1;
 }
 
-int ESP8266Device::connectAP(ATType type) {}
+bool ESP8266Device::connectAP(AccessPoint ap)
+{
+    auto cmdHandle = command.getRAII();
+    std::string suffix = "+CWJAP=\"" + ap.ssid + "\",\"" + ap.pwd + "\"";
 
-int ESP8266Device::getAPList(ATType type) {}
+    sendAT(suffix);
 
-int ESP8266Device::disconnectAP() {}
+    if (response.take())
+        return true;
+}
 
-int ESP8266Device::softAPMode(ATType type) {}
+template <size_t numPoints>
+std::array<AccessPoint, numPoints> ESP8266Device::getAPList()
+{
+    return std::array<AccessPoint, numPoints>();
+}
 
-int ESP8266Device::listClients() {}
+bool ESP8266Device::disconnectAP()
+{
+    auto cmdHandle = command.getRAII();
+    std::string suffix = "+CWQAP";
+    sendAT(suffix);
+    if (response.take())
+        return true;
+}
 
-int ESP8266Device::setDHCP() {}
-
-int ESP8266Device::connStatus(ATType type) {}
+int ESP8266Device::connStatus()
+{
+    auto cmdHandle = command.getRAII();
+    std::string suffix = "+CIPSTATUS";
+    sendAT(suffix);
+    if (response.take())
+        return true;
+}
 
 int ESP8266Device::connStart(const Connection &conn)
 {
@@ -93,11 +123,34 @@ int ESP8266Device::connStart(const Connection &conn)
         return -1;
 }
 
-int ESP8266Device::sendData(ATType type) {}
+int ESP8266Device::sendData(std::string data)
+{
+    auto cmdHandle = command.getRAII();
+    std::string suffix = "+CIPSEND=" + std::to_string(data.size());
+    sendAT(suffix);
+    if (response.take()) {
+        // Parse for '>'
+        
+    }
+}
 
-int ESP8266Device::connClose(ATType type) {}
+bool ESP8266Device::connClose()
+{
+    auto cmdHandle = command.getRAII();
+    std::string suffix = "+CIPCLOSE";
+    sendAT(suffix);
+    if (response.take())
+        return true;
+}
 
-int ESP8266Device::getIP() {}
+std::string ESP8266Device::getIP()
+{
+    auto cmdHandle = command.getRAII();
+    std::string suffix = "+CIFSR";
+    sendAT(suffix);
+    if (response.take())
+        return "TRUE";
+}
 
 HttpResult ESP8266Interface::request(const Connection &conn,
                                      const HttpRequest &request)
