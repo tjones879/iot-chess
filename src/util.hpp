@@ -21,6 +21,7 @@ class Promise
 public:
     virtual void onSuccess(std::string resp);
     virtual void onFailure(std::string fail);
+    virtual ~Promise();
 };
 
 /**
@@ -63,6 +64,9 @@ public:
     bool give();
     bool giveFromISR(BaseType_t *taskWoken);
     SemaphoreHandle getRAII();
+private:
+    BinarySemaphore(const BinarySemaphore&) = delete;
+    BinarySemaphore &operator=(const BinarySemaphore&) = delete;
 };
 
 /**

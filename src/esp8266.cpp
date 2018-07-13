@@ -77,6 +77,7 @@ bool ESP8266Device::connectAP(AT::AccessPoint ap)
 
     if (response.take())
         return true;
+    return false;
 }
 
 template <size_t numPoints>
@@ -91,6 +92,7 @@ bool ESP8266Device::disconnectAP()
     sendAT(AT::Code::CWQAP, "");
     if (response.take())
         return true;
+    return false;
 }
 
 int ESP8266Device::connStatus()
@@ -99,17 +101,14 @@ int ESP8266Device::connStatus()
     sendAT(AT::Code::CIPSTATUS, "");
     if (response.take())
         return true;
+    return false;
 }
 
 int ESP8266Device::connStart(const Connection &conn)
 {
     std::string suffix{};
-    switch (conn.type) {
-    case ConnectionType::UDP:
-        suffix += "\"UDP\"";
-    case ConnectionType::TCP:
-        suffix += "\"TCP\"";
-    }
+
+    suffix += toStr(conn.type);
     suffix += ",\"" + conn.address + "\"";
     suffix += "," + std::to_string(conn.port);
 
@@ -130,6 +129,7 @@ int ESP8266Device::sendData(std::string data)
         // Parse for '>'
 
     }
+    return -1;
 }
 
 bool ESP8266Device::connClose()
@@ -138,6 +138,7 @@ bool ESP8266Device::connClose()
     sendAT(AT::Code::CIPCLOSE, "");
     if (response.take())
         return true;
+    return false;
 }
 
 std::string ESP8266Device::getIP()
@@ -146,10 +147,12 @@ std::string ESP8266Device::getIP()
     sendAT(AT::Code::CIFSR, "");
     if (response.take())
         return "TRUE";
+    return "FALSE";
 }
 
 HttpResult ESP8266Interface::request(const Connection &conn,
                                      const HttpRequest &request)
 {
     // Connect to the location
+    return HttpResult();
 }

@@ -19,6 +19,30 @@ enum class ConnectionType : uint8_t
     TCP
 };
 
+namespace {
+    constexpr std::initializer_list<std::pair<ConnectionType, const char*>> mapping = {
+        {ConnectionType::UDP,  "\"UDP\""},
+        {ConnectionType::TCP,  "\"TCP\""}
+    };
+}
+
+/**
+ * Attempt to convert a value in the ConnectionType enum to a string.
+ *
+ * This function should always complete during compile time.
+ *
+ * @param c ConnectionType value to convert to a string.
+ * @return  The corresponding string with the connection type
+ *          Empty string on failure
+ */
+constexpr const char *toStr(ConnectionType c)
+{
+    for (auto &p : mapping)
+        if (c == p.first)
+            return p.second;
+    return "";
+}
+
 class Connection
 {
 public:
@@ -66,4 +90,5 @@ class HttpClient
 public:
     virtual HttpResult request(const Connection &conn,
                                const HttpRequest &request);
+    virtual ~HttpClient();
 };

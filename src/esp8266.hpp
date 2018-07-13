@@ -21,7 +21,8 @@ private:
     BinarySemaphore command, response;
 
 public:
-    ESP8266Device(uint32_t usart_module) : _usart(usart_module) {}
+    ESP8266Device(uint32_t usart_module)
+        : _usart(usart_module), command(), response() {}
 
     int testAT();
     int restart();
