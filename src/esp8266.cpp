@@ -3,13 +3,13 @@
 
 #include <libopencm3/stm32/usart.h>
 
-void ESP8266Device::sendAT(AT::Code command, const std::string &extra)
+void ESP8266Device::sendAT(AT::Code code, const std::string &extra)
 {
     // All messages begin with AT followed by <command>
     usart_send_blocking(_usart, 'A');
     usart_send_blocking(_usart, 'T');
 
-    auto cmdStr = AT::toStr(command);
+    auto cmdStr = std::string(AT::toStr(code));
     for (auto i : cmdStr)
         usart_send_blocking(_usart, i);
 
@@ -34,7 +34,7 @@ void ESP8266Device::send(std::string text)
 int ESP8266Device::testAT()
 {
     auto cmdHandle = command.getRAII();
-    sendAT("");
+    sendAT(AT::Code::AT, "");
     if (response.take())
         return 0;
     else
@@ -44,7 +44,7 @@ int ESP8266Device::testAT()
 int ESP8266Device::restart()
 {
     auto cmdHandle = command.getRAII();
-    sendAT(AT::Code::RST);
+    sendAT(AT::Code::RST, "");
     if (response.take())
         return 0;
     else
@@ -54,11 +54,11 @@ int ESP8266Device::restart()
 /**
  *
  */
-int ESP8266Device::wifiMode(AT::Type type, WIFIMode mode)
+int ESP8266Device::wifiMode(AT::Type type, AT::WIFIMode mode)
 {
     auto cmdHandle = command.getRAII();
     std::string suffix;
-    if (type == AT::Type::Query)
+    if (type == AT::Type::QUERY)
         suffix = "?";
 
     sendAT(AT::Code::CWMODE, suffix);
@@ -68,28 +68,27 @@ int ESP8266Device::wifiMode(AT::Type type, WIFIMode mode)
         return -1;
 }
 
-bool ESP8266Device::connectAP(AccessPoint ap)
+bool ESP8266Device::connectAP(AT::AccessPoint ap)
 {
     auto cmdHandle = command.getRAII();
-    std::string suffix = "+CWJAP=\"" + ap.ssid + "\",\"" + ap.pwd + "\"";
+    std::string suffix = "\"" + ap.ssid + "\",\"" + ap.password + "\"";
 
-    sendAT(suffix);
+    sendAT(AT::Code::CWJAP, suffix);
 
     if (response.take())
         return true;
 }
 
 template <size_t numPoints>
-std::array<AccessPoint, numPoints> ESP8266Device::getAPList()
+std::array<AT::AccessPoint, numPoints> ESP8266Device::getAPList()
 {
-    return std::array<AccessPoint, numPoints>();
+    return std::array<AT::AccessPoint, numPoints>();
 }
 
 bool ESP8266Device::disconnectAP()
 {
     auto cmdHandle = command.getRAII();
-    std::string suffix = "+CWQAP";
-    sendAT(suffix);
+    sendAT(AT::Code::CWQAP, "");
     if (response.take())
         return true;
 }
@@ -97,15 +96,14 @@ bool ESP8266Device::disconnectAP()
 int ESP8266Device::connStatus()
 {
     auto cmdHandle = command.getRAII();
-    std::string suffix = "+CIPSTATUS";
-    sendAT(suffix);
+    sendAT(AT::Code::CIPSTATUS, "");
     if (response.take())
         return true;
 }
 
 int ESP8266Device::connStart(const Connection &conn)
 {
-    std::string suffix = "+CIPSTART";
+    std::string suffix{};
     switch (conn.type) {
     case ConnectionType::UDP:
         suffix += "\"UDP\"";
@@ -116,7 +114,7 @@ int ESP8266Device::connStart(const Connection &conn)
     suffix += "," + std::to_string(conn.port);
 
     auto cmdHandle = command.getRAII();
-    sendAT(suffix);
+    sendAT(AT::Code::CIPSTART, suffix);
     if (response.take())
         return 0;
     else
@@ -126,19 +124,18 @@ int ESP8266Device::connStart(const Connection &conn)
 int ESP8266Device::sendData(std::string data)
 {
     auto cmdHandle = command.getRAII();
-    std::string suffix = "+CIPSEND=" + std::to_string(data.size());
-    sendAT(suffix);
+    std::string suffix = std::to_string(data.size());
+    sendAT(AT::Code::CIPSEND, suffix);
     if (response.take()) {
         // Parse for '>'
-        
+
     }
 }
 
 bool ESP8266Device::connClose()
 {
     auto cmdHandle = command.getRAII();
-    std::string suffix = "+CIPCLOSE";
-    sendAT(suffix);
+    sendAT(AT::Code::CIPCLOSE, "");
     if (response.take())
         return true;
 }
@@ -146,8 +143,7 @@ bool ESP8266Device::connClose()
 std::string ESP8266Device::getIP()
 {
     auto cmdHandle = command.getRAII();
-    std::string suffix = "+CIFSR";
-    sendAT(suffix);
+    sendAT(AT::Code::CIFSR, "");
     if (response.take())
         return "TRUE";
 }

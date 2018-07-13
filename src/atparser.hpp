@@ -18,9 +18,9 @@ enum class Type : uint8_t
 
 enum class WIFIMode : char
 {
-    Client = '1',
-    Host = '2',
-    Dual = '3'
+    CLIENT = '1',
+    HOST = '2',
+    DUAL = '3'
 };
 
 enum class ECN : uint8_t
@@ -32,17 +32,19 @@ enum class ECN : uint8_t
     WPA_WPA2_PSK = 4
 };
 
-class AccessPoint {
+struct AccessPoint {
     ECN security;
     std::string ssid;
     int8_t rssi;
     std::string mac;
-public:
+    std::string password;
+
     AccessPoint(ECN sec, std::string sid, int8_t signal, std::string mac);
 };
 
 enum class Code
 {
+    AT,
     RST,
     GMR,
     GSLP,
@@ -70,6 +72,7 @@ enum class Code
 };
 
 constexpr std::initializer_list<std::pair<Code, const char*>> mapping = {
+    {Code::AT,        ""},
     {Code::RST,       "+RST"},
     {Code::GMR,       "+GMR"},
     {Code::GSLP,      "+GSLP"},
@@ -96,19 +99,39 @@ constexpr std::initializer_list<std::pair<Code, const char*>> mapping = {
     {Code::CIUPDATE,  "+CIUPDATE"}
 };
 
-constexpr std::optional<const char *> toStr(Code c) {
-    for (auto &p : mapping)
-        if (c == p.first)
-            return p.second;
-    return {};
-}
+/**
+ * Attempt to convert a value in the Code enum to a string.
+ *
+ * This function should always complete during compile time.
+ *
+ * @param c Code value to convert to a string.
+ * @return The corresponding string with the code enum
+ *         Empty string on failure
+ */
+constexpr const char * toStr(Code c);
 
-constexpr std::optional<Code> toEnum(std::string_view name) {
-    for (auto &p : mapping)
-        if (name == p.second)
-            return p.first;
-    return {};
-}
+constexpr std::optional<Code> toEnum(std::string_view name);
+
+/**
+ * Attempt to find the appropriate Code token in the string.
+ *
+ * @param string  The string_view that the code will be searched in.
+ * @param code    The Code enum value that will be found in the string
+ * @return        The ending position of the Code on success,
+ *                std::string_view::npos on failure.
+ */
+size_t parseCode(std::string_view string, Code code);
+
+/**
+ * Attempt to parse a string surrounded in quotation marks.
+ *
+ * @param message  The string_view that the string will be pulled from.
+ * @return         Pair containing the extracted string if found
+ *                 and the the new position in the string_view where
+ *                 the parsed string ends.
+ *
+ */
+std::pair<std::string, size_t> parseString(std::string_view message);
 
 template <size_t size>
 std::array<AccessPoint, size> parseCWLAP(std::string message);

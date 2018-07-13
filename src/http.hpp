@@ -37,9 +37,7 @@ class HttpRequest
 {
 public:
     RequestType type;
-    std::string baseUrl;
-    std::string path;
-    std::string body;
+    std::string baseUrl, path, body;
 
     std::string toString()
     {
@@ -48,8 +46,10 @@ public:
         switch (type) {
         case RequestType::GET:
             request += "GET";
+            break;
         case RequestType::POST:
             request += "POST";
+            break;
         }
 
         request += " " + path;

@@ -3,6 +3,7 @@
 #include "http.hpp"
 #include "util.hpp"
 #include <string>
+#include <array>
 #include "atparser.hpp"
 
 /**
@@ -24,21 +25,24 @@ public:
 
     int testAT();
     int restart();
-    int wifiMode(AT::Type type, WIFIMode mode);
-    int connectAP(AT::Type type);
-    int getAPList(AT::Type type);
-    int disconnectAP();
+    int wifiMode(AT::Type type, AT::WIFIMode mode);
+    bool connectAP(AT::AccessPoint ap);
+    template <size_t numPoints>
+    std::array<AT::AccessPoint, numPoints> getAPList();
+    bool disconnectAP();
     int softAPMode(AT::Type type);
     int listClients();
     int setDHCP();
-    int connStatus(AT::Type type);
+    int connStatus();
     int connStart(const Connection &conn);
     int sendData(AT::Type type);
-    int connClose(AT::Type type);
-    int getIP();
+    bool connClose();
+    std::string getIP();
 
 private:
-    void sendAT(AT::Code command);
+    void sendAT(AT::Code command, const std::string &extra);
+    void send(std::string text);
+    int sendData(std::string data);
 };
 
 class ESP8266Interface : public HttpClient
@@ -63,7 +67,7 @@ public:
      * @return      Number of access points found if >= 0.
      *              Negative on error
      */
-    int scan(AccessPoint *ap, uint8_t count);
+    int scan(AT::AccessPoint *ap, uint8_t count);
     HttpResult request(const Connection &conn,
                        const HttpRequest &request) override;
 };
