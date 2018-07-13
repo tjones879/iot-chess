@@ -1,0 +1,30 @@
+digraph "xQueueGenericSend"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="xQueueGenericSend",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="xTaskRemoveFromEventList",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tasks_8c.html#a6d21c9054b62d8bc1bfb2724e11578d9"];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="uxListRemove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$list_8c.html#a274fdced76bbdd9d8a4c4840ded2920c"];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="vListInsertEnd",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$list_8c.html#a3240bc0f43fcf755be02bfc6de7dc6ef"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="vTaskInternalSetTimeOutState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tasks_8c.html#a91fbc7c4b65e32fae51b7d43ebdcb131"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="vTaskSuspendAll",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tasks_8c.html#a084d232640bd1d04bcac0b8784417015"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="xTaskCheckForTimeOut",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tasks_8c.html#acfc8de487c86355713d0e8546506d9e4"];
+  Node7 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="vTaskPlaceOnEventList",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tasks_8c.html#adc9eb47ceecf7dd7ee325bebff9eafc5"];
+  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="vListInsert",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$list_8c.html#a28faa70d3ec4b4f39e53b0fc52d62ecf"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="xTaskResumeAll",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tasks_8c.html#adf830ea0f150fcdfdaa944667137f080"];
+  Node10 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="xTaskIncrementTick",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tasks_8c.html#a54f31e9aef0eb7b87e48c7d68ecc84c1"];
+  Node11 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

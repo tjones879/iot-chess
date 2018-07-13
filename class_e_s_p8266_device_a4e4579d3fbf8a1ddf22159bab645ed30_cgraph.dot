@@ -1,0 +1,13 @@
+digraph "ESP8266Device::connClose"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="ESP8266Device::connClose",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="BinarySemaphore::getRAII",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_binary_semaphore.html#a870538fc0f5d4fbf443729d171ca6eb5"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="BinarySemaphore::take",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_binary_semaphore.html#a64d958f5629aa25038ae0396c2ce2a65"];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pdToBoolean",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$util_8cpp.html#a2be237b89c4f2d00156bac3f9faacd31"];
+}

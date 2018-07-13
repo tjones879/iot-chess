@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['vapplicationstackoverflowhook',['vApplicationStackOverflowHook',['../miniblink_8cpp.html#a306672a74bdd13ce210c05fca3385c59',1,'miniblink.cpp']]],
+  ['vlistinitialise',['vListInitialise',['../list_8c.html#aa0831d347bba16bfbe524f4faa790b9d',1,'list.c']]],
+  ['vlistinitialiseitem',['vListInitialiseItem',['../list_8c.html#a43e37223a86f5d0688ac4470d3106e87',1,'list.c']]],
+  ['vlistinsert',['vListInsert',['../list_8c.html#a28faa70d3ec4b4f39e53b0fc52d62ecf',1,'list.c']]],
+  ['vlistinsertend',['vListInsertEnd',['../list_8c.html#a3240bc0f43fcf755be02bfc6de7dc6ef',1,'list.c']]],
+  ['vportendscheduler',['vPortEndScheduler',['../port_8c.html#af76f3c0b44c5b5c06fc046a4ee1a6423',1,'port.c']]],
+  ['vportentercritical',['vPortEnterCritical',['../port_8c.html#a2ed3554a3de09a3bd09d396ee081ab69',1,'port.c']]],
+  ['vportexitcritical',['vPortExitCritical',['../port_8c.html#aed20ada05b957181a0de042802a82a5b',1,'port.c']]],
+  ['vportfree',['vPortFree',['../heap__1_8c.html#a1e7cea2fd1bc894ea3b5f5e8179d259b',1,'heap_1.c']]],
+  ['vportinitialiseblocks',['vPortInitialiseBlocks',['../heap__1_8c.html#a8bf103ce32ce8473574e9920af8b4eec',1,'heap_1.c']]],
+  ['vportsetuptimerinterrupt',['vPortSetupTimerInterrupt',['../port_8c.html#a4649001ea4d29b80759e6eca4bba58eb',1,'port.c']]],
+  ['vportsvchandler',['vPortSVCHandler',['../opencm3_8c.html#a1ce72c3505f069e620564c6408051f86',1,'vPortSVCHandler(extern void xPortSysTickHandler void):&#160;opencm3.c'],['../port_8c.html#a859e86b6143d6bc4cf96b2867f408c75',1,'vPortSVCHandler(void):&#160;port.c']]],
+  ['vqueuedelete',['vQueueDelete',['../queue_8c.html#a35c0b4f9a0e940cb3a86ca4c5e84c41c',1,'queue.c']]],
+  ['vtaskendscheduler',['vTaskEndScheduler',['../tasks_8c.html#aeadc53d3d0d0ea3a6c7702a9eacbf452',1,'tasks.c']]],
+  ['vtaskinternalsettimeoutstate',['vTaskInternalSetTimeOutState',['../tasks_8c.html#a91fbc7c4b65e32fae51b7d43ebdcb131',1,'tasks.c']]],
+  ['vtaskmissedyield',['vTaskMissedYield',['../tasks_8c.html#a33c369f5f08ab96659f94093fdb985af',1,'tasks.c']]],
+  ['vtaskplaceoneventlist',['vTaskPlaceOnEventList',['../tasks_8c.html#adc9eb47ceecf7dd7ee325bebff9eafc5',1,'tasks.c']]],
+  ['vtaskplaceonunorderedeventlist',['vTaskPlaceOnUnorderedEventList',['../tasks_8c.html#a0896d9cd10d789ef8dbb95c4959c3ce5',1,'tasks.c']]],
+  ['vtaskremovefromunorderedeventlist',['vTaskRemoveFromUnorderedEventList',['../tasks_8c.html#a82d239ddcdd2d68abe14789b1257b11f',1,'tasks.c']]],
+  ['vtasksettimeoutstate',['vTaskSetTimeOutState',['../tasks_8c.html#a5dfb2b9e41fb002318d9c55452a91c83',1,'tasks.c']]],
+  ['vtaskstartscheduler',['vTaskStartScheduler',['../tasks_8c.html#a598661cdd2a6af95a077245d11e3d142',1,'tasks.c']]],
+  ['vtasksuspendall',['vTaskSuspendAll',['../tasks_8c.html#a084d232640bd1d04bcac0b8784417015',1,'tasks.c']]],
+  ['vtaskswitchcontext',['vTaskSwitchContext',['../tasks_8c.html#a9c86137bc3c1cbffc39fff22627cb885',1,'tasks.c']]]
+];

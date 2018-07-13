@@ -1,0 +1,16 @@
+digraph "pvPortMalloc"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="pvPortMalloc",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="vTaskSuspendAll",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tasks_8c.html#a084d232640bd1d04bcac0b8784417015"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="xTaskResumeAll",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tasks_8c.html#adf830ea0f150fcdfdaa944667137f080"];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="uxListRemove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$list_8c.html#a274fdced76bbdd9d8a4c4840ded2920c"];
+  Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="xTaskIncrementTick",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tasks_8c.html#a54f31e9aef0eb7b87e48c7d68ecc84c1"];
+  Node5 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['u',['u',['../struct_queue_definition.html#ab2c557f3e7a58a29bd07c3c62e7e568a',1,'QueueDefinition']]],
+  ['uart_5fputc',['uart_putc',['../miniblink_8cpp.html#ae468e0937557eefb10705cec62e1599b',1,'miniblink.cpp']]],
+  ['udp',['UDP',['../http_8hpp.html#ac0e5c0aa9e307cf7f219e9431598e85faf5ef036b4d8b630721e51fe23489fbc9',1,'http.hpp']]],
+  ['usart1_5fisr',['usart1_isr',['../miniblink_8cpp.html#a7b98b3bc83ff519a8840f2c49e523897',1,'miniblink.cpp']]],
+  ['usarttask',['usartTask',['../miniblink_8cpp.html#a414d0c97bec1d6c37290bc4052725cda',1,'miniblink.cpp']]],
+  ['util_2ecpp',['util.cpp',['../util_8cpp.html',1,'']]],
+  ['util_2ehpp',['util.hpp',['../util_8hpp.html',1,'']]],
+  ['uxitemsize',['uxItemSize',['../struct_queue_definition.html#a81bb7d3826909244baa9debf5a55abb0',1,'QueueDefinition']]],
+  ['uxlength',['uxLength',['../struct_queue_definition.html#ae80d17a812c669d4d41265b7f693988c',1,'QueueDefinition']]],
+  ['uxlistremove',['uxListRemove',['../list_8c.html#a274fdced76bbdd9d8a4c4840ded2920c',1,'list.c']]],
+  ['uxmessageswaiting',['uxMessagesWaiting',['../struct_queue_definition.html#a12b07a40152d0f21488ca06d362d13d1',1,'QueueDefinition']]],
+  ['uxpriority',['uxPriority',['../structtsk_task_control_block.html#a79187811e3d2a15595942e3b44237d85',1,'tskTaskControlBlock']]],
+  ['uxqueuemessageswaiting',['uxQueueMessagesWaiting',['../queue_8c.html#a4158a6134c9d1c60ffdb18d279d475b1',1,'queue.c']]],
+  ['uxqueuemessageswaitingfromisr',['uxQueueMessagesWaitingFromISR',['../queue_8c.html#ad5d110bc27c691ff8da238e0116bf92a',1,'queue.c']]],
+  ['uxqueuespacesavailable',['uxQueueSpacesAvailable',['../queue_8c.html#a27d6fb77ce7a0b5a16f6471730d33201',1,'queue.c']]],
+  ['uxqueuetype',['uxQueueType',['../queue_8c.html#afe3f7afb2a02c085f2d634003902cbc0',1,'queue.c']]],
+  ['uxrecursivecallcount',['uxRecursiveCallCount',['../struct_queue_definition.html#a2cf88e286477f6f89fe1009d722dc4cf',1,'QueueDefinition']]],
+  ['uxtaskgetnumberoftasks',['uxTaskGetNumberOfTasks',['../tasks_8c.html#a4b660446c721df74158dddb9fc189c1e',1,'tasks.c']]],
+  ['uxtaskreseteventitemvalue',['uxTaskResetEventItemValue',['../tasks_8c.html#a7ffe39eff8b9037b2de04f15a10ba717',1,'tasks.c']]]
+];
